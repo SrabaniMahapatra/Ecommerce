@@ -96,6 +96,16 @@ app.use("/api/hero-slides", heroSlidesRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/banner-offers", bannerOffersRoutes);
 
+// Root route
+app.get("/", (req, res) => {
+  res.json({ 
+    success: true, 
+    message: "E-commerce Backend API",
+    version: "1.0.0",
+    endpoints: "/api/health"
+  });
+});
+
 // Health check
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "Server is running" });

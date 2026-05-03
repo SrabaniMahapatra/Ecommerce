@@ -3,11 +3,11 @@ node_modules/
 .env.local
 frontend/.env.local
 backend/.env
+test-*.js
+backend/test*.js
 .DS_Store
 dist/
 build/
 backend/uploads/
 .vscode/
 *.log
-.idea/
-.vscode/

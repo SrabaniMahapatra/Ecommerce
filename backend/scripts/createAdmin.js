@@ -14,7 +14,8 @@ const createAdminUser = async () => {
     await mongoose.connect(process.env.MONGODB_URI, { family: 4 });
     console.log("✅ MongoDB connected");
 
-    const newPassword = "Tealeaf@Admin831013";
+    // Use password from environment variable or provide a secure one
+    const newPassword = process.env.ADMIN_PASSWORD || "Admin@12345"; // Change this in .env file
 
     // Check if admin already exists
     let adminUser = await User.findOne({ email: "admin@tealeaf.com" });

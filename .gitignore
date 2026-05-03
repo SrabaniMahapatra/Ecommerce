@@ -1,13 +1,43 @@
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables & Secrets
 .env
 .env.local
+.env.*.local
 frontend/.env.local
 backend/.env
-test-*.js
+credentials.json
+.npmrc
+
+# Test files with sensitive data
+test-login.js
 backend/test*.js
-.DS_Store
+
+# IDE & Editor config
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Build & Generated files
 dist/
 build/
-backend/uploads/
-.vscode/
+.cache/
+.eslintcache
+
+# System & OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
 *.log
+logs/
+
+# User uploads
+backend/uploads/
+uploads/

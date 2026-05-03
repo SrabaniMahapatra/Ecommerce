@@ -22,7 +22,7 @@ export default function Chatbot() {
 
   useEffect(() => {
     // Fetch products so the agent knows what we have
-    fetch("https://tealeafluxe.onrender.com/api/products")
+    fetch("http://localhost:5000/api/products")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setProducts(data.products);
@@ -46,7 +46,7 @@ export default function Chatbot() {
       setAwaitingOrderNumber(false);
       try {
         const response = await fetch(
-          "https://tealeafluxe.onrender.com/api/orders/track",
+          "http://localhost:5000/api/orders/track",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

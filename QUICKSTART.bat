@@ -46,7 +46,7 @@ echo.
 echo 🔑 DEFAULT ADMIN CREDENTIALS:
 echo   Email: admin@tealeaf.com
 echo   Password: admin123
-echo.
+echo..
 echo 🌐 URLS:
 echo   Frontend: http://localhost:5173
 echo   Backend API: http://localhost:5000

@@ -4,6 +4,11 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
+import dns from "dns";
+
+// Fix DNS resolution on Windows
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+
 import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/products.js";
 import wishlistRoutes from "./routes/wishlist.js";
@@ -36,37 +41,43 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Connect to MongoDB with retry logic
 const connectMongoDB = async (retries = 5) => {
-  // Convert SRV to standard connection string if needed
   let uri = process.env.MONGODB_URI;
-  if (uri.includes('mongodb+srv://')) {
-    // For SRV format, mongoose handles it automatically with DNS lookup
-    // But if DNS is blocked, we need standard format
-    console.log("Using connection string as provided...");
-  }
+  
+  console.log("🔍 Attempting to connect to MongoDB...");
+  console.log("📍 Using DNS: Google Public DNS (8.8.8.8)");
+  
+  const mongoOptions = {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 20000,
+    socketTimeoutMS: 45000,
+    family: 4,
+    retryWrites: true,
+    w: 'majority',
+    maxPoolSize: 10,
+    maxIdleTimeMS: 30000,
+  };
   
   for (let i = 0; i < retries; i++) {
     try {
-      await mongoose.connect(uri, {
-        serverSelectionTimeoutMS: 5000,
-        connectTimeoutMS: 10000,
-        socketTimeoutMS: 45000,
-        retryWrites: true,
-        w: 'majority',
-        maxPoolSize: 10,
-        maxIdleTimeMS: 30000,
-        family: 4 // Force IPv4 to fix DNS ECONNREFUSED issues on Windows
-      });
-      console.log("✅ MongoDB connected");
+      await mongoose.connect(uri, mongoOptions);
+      console.log("✅ MongoDB connected successfully!");
       return;
     } catch (err) {
-      console.error(`❌ Attempt ${i + 1} failed:`, err.message);
+      console.error(`\n❌ Attempt ${i + 1} failed:`);
+      console.error(`   Error: ${err.message}`);
+      console.error(`   Code: ${err.code}\n`);
+      
       if (i < retries - 1) {
-        console.log(`Retrying in 3 seconds...`);
+        console.log(`⏳ Retrying in 3 seconds... (${retries - i - 1} attempts left)\n`);
         await new Promise(resolve => setTimeout(resolve, 3000));
       } else {
-        console.error("❌ Failed to connect to MongoDB after retries");
-        // Instead of exiting, keep the server running so frontend works
-        console.log("⚠️  MongoDB not available, but server is running");
+        console.error("\n⚠️  MongoDB Connection Failed!");
+        console.error("📌 Check these things:");
+        console.error("   1. Is your MongoDB Atlas IP Whitelist updated?");
+        console.error("   2. Are your username and password correct?");
+        console.error("   3. Is your cluster name correct in .env?");
+        console.error("   4. Do you have internet connection?");
+        console.error("\n🔗 Atlas Dashboard: https://cloud.mongodb.com");
       }
     }
   }

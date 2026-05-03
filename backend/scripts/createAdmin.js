@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import User from "../models/User.js";
 import dotenv from "dotenv";
+import dns from "dns";
+
+// Fix DNS resolution on Windows
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
 
 dotenv.config();
 

@@ -137,7 +137,7 @@ export default function Navbar() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://tealeafluxe.onrender.com/api/products",
+          "http://localhost:5000/api/products",
         );
         const data = await response.json();
         if (data.success && data.products) {
@@ -151,7 +151,7 @@ export default function Navbar() {
     const fetchOffers = async () => {
       try {
         const response = await fetch(
-          "https://tealeafluxe.onrender.com/api/banner-offers",
+          "http://localhost:5000/api/banner-offers",
         );
         const data = await response.json();
         if (data.success && data.offers && data.offers.length > 0) {

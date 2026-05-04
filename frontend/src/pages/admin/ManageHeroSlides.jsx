@@ -53,7 +53,7 @@ export default function ManageHeroSlides() {
  try {
  setLoading(true);
  const response = await fetch(
- "http://localhost:5000/api/hero-slides/admin/all",
+ `${import.meta.env.VITE_API_URL}/api/hero-slides/admin/all`,
  {
  headers: {
  Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ export default function ManageHeroSlides() {
  setIsUploading(true);
  setError("");
  const response = await fetch(
- "http://localhost:5000/api/upload",
+`${import.meta.env.VITE_API_URL}/api/upload`,
  {
  method: "POST",
  headers: {
@@ -137,8 +137,8 @@ export default function ManageHeroSlides() {
  try {
  const method = editingSlide ? "PUT" : "POST";
  const url = editingSlide
- ? `http://localhost:5000/api/hero-slides/${editingSlide._id}`
- : "http://localhost:5000/api/hero-slides";
+ ? `${import.meta.env.VITE_API_URL}/api/hero-slides/${editingSlide._id}`
+ :`${import.meta.env.VITE_API_URL}/api/hero-slides`;
 
  const response = await fetch(url, {
  method,
@@ -182,7 +182,7 @@ export default function ManageHeroSlides() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/hero-slides/${slideId}`,
+ `${import.meta.env.VITE_API_URL}/api/hero-slides/${slideId}`,
  {
  method: "DELETE",
  headers: {

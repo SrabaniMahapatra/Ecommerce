@@ -18,7 +18,7 @@ export default function Wishlist() {
  const fetchWishlist = async () => {
  try {
  const response = await fetch(
- "http://localhost:5000/api/wishlist",
+`${import.meta.env.VITE_API_URL}/api/wishlist`,
  {
  headers: {
  Authorization: `Bearer ${token}`,

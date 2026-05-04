@@ -440,7 +440,7 @@ export default function Home() {
  try {
  setSlidesLoading(true);
  const response = await fetch(
- "http://localhost:5000/api/hero-slides",
+ `${import.meta.env.VITE_API_URL}/api/hero-slides`,
  );
 
  const data = await response.json();
@@ -463,7 +463,7 @@ export default function Home() {
  try {
  setLoading(true);
  const response = await fetch(
- "http://localhost:5000/api/products",
+`${import.meta.env.VITE_API_URL}/api/products`,
  );
  const data = await response.json();
  if (data.success && data.products) {

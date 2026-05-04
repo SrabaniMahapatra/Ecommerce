@@ -19,7 +19,7 @@ export default function ManageAdmins() {
  const fetchAdmins = async () => {
  try {
  const response = await fetch(
- "http://localhost:5000/api/customers?role=admin",
+ `${import.meta.env.VITE_API_URL}/api/customers?role=admin`,
  {
  headers: { Authorization: `Bearer ${token}` },
  },
@@ -44,7 +44,7 @@ export default function ManageAdmins() {
 
  try {
  const response = await fetch(
- "http://localhost:5000/api/customers/admin",
+ `${import.meta.env.VITE_API_URL}/api/customers/admin`,
  {
  method: "POST",
  headers: {
@@ -78,7 +78,7 @@ export default function ManageAdmins() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/customers/${adminId}`,
+ `${import.meta.env.VITE_API_URL}/api/customers/${adminId}`,
  {
  method: "DELETE",
  headers: { Authorization: `Bearer ${token}` },

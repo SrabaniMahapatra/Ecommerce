@@ -49,8 +49,8 @@ export default function ManageOrders() {
  setLoading(true);
  const url =
  statusFilter === "all"
- ? "http://localhost:5000/api/orders"
- : `http://localhost:5000/api/orders?status=${statusFilter}`;
+ ? `${import.meta.env.VITE_API_URL}/api/orders`
+ : `${import.meta.env.VITE_API_URL}/api/orders?status=${statusFilter}`;
 
  const response = await fetch(url, {
  headers: {
@@ -92,7 +92,7 @@ export default function ManageOrders() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/orders/${selectedOrder._id}/status`,
+ `${import.meta.env.VITE_API_URL}/api/orders/${selectedOrder._id}/status`,
  {
  method: "PUT",
  headers: {
@@ -127,7 +127,7 @@ export default function ManageOrders() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/orders/${orderId}`,
+ `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
  {
  method: "DELETE",
  headers: {

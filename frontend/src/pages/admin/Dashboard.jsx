@@ -55,7 +55,7 @@ export default function AdminDashboard() {
  const fetchProducts = async () => {
  try {
  const response = await fetch(
- "http://localhost:5000/api/products",
+ `${import.meta.env.VITE_API_URL}/api/products`,
  );
  const data = await response.json();
  if (data.success) {
@@ -120,8 +120,8 @@ export default function AdminDashboard() {
  try {
  const method = editingProduct ? "PUT" : "POST";
  const url = editingProduct
- ? `http://localhost:5000/api/products/${editingProduct._id}`
- : "http://localhost:5000/api/products";
+ ?  `${import.meta.env.VITE_API_URL}/api/products/${editingProduct._id}`
+ :  `${import.meta.env.VITE_API_URL}/api/products`;
 
  const response = await fetch(url, {
  method,
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/products/${productId}`,
+ `${import.meta.env.VITE_API_URL}/api/products/${productId}`,
  {
  method: "DELETE",
  headers: {
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
  formDataObj.append("image", file);
 
  const response = await fetch(
- "http://localhost:5000/api/products/upload/image",
+ `${import.meta.env.VITE_API_URL}/api/products/upload/image`,
  {
  method: "POST",
  headers: {

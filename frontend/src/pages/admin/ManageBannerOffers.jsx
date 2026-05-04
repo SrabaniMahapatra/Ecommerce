@@ -44,7 +44,7 @@ export default function ManageBannerOffers() {
  try {
  setLoading(true);
  const response = await fetch(
- "http://localhost:5000/api/banner-offers/admin",
+`${import.meta.env.VITE_API_URL}/api/banner-offers/admin`,
  {
  headers: {
  Authorization: `Bearer ${token}`,
@@ -83,8 +83,8 @@ export default function ManageBannerOffers() {
  try {
  const method = editingOffer ? "PUT" : "POST";
  const url = editingOffer
- ? `http://localhost:5000/api/banner-offers/${editingOffer._id}`
- : "http://localhost:5000/api/banner-offers";
+ ? `${import.meta.env.VITE_API_URL}/api/banner-offers/${editingOffer._id}`
+ : `${import.meta.env.VITE_API_URL}/api/banner-offers`;
 
  const response = await fetch(url, {
  method,
@@ -128,7 +128,7 @@ export default function ManageBannerOffers() {
 
  try {
  const response = await fetch(
- `http://localhost:5000/api/banner-offers/${offerId}`,
+ `${import.meta.env.VITE_API_URL}/api/banner-offers/${offerId}`,
  {
  method: "DELETE",
  headers: {

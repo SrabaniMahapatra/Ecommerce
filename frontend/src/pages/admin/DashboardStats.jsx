@@ -57,7 +57,7 @@ export default function DashboardStats() {
  try {
  setLoading(true);
  const response = await fetch(
- "http://localhost:5000/api/stats",
+ `${import.meta.env.VITE_API_URL}/api/stats`,
  {
  headers: {
  Authorization: `Bearer ${token}`,

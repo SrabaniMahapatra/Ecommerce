@@ -23,7 +23,7 @@ export default function MyOrders() {
  if (!token) return;
  try {
  const response = await fetch(
- "http://localhost:5000/api/orders/user/my-orders",
+`${import.meta.env.VITE_API_URL}/api/orders/user/my-orders`,
  {
  headers: {
  Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ export default function MyOrders() {
  if (!window.confirm("Are you sure you want to cancel this order?")) return;
  try {
  const response = await fetch(
- `http://localhost:5000/api/orders/${orderId}/cancel`,
+ `${import.meta.env.VITE_API_URL}/api/orders/${orderId}/cancel`,
  {
  method: "PUT",
  headers: {

@@ -46,7 +46,7 @@ export default function Chatbot() {
       setAwaitingOrderNumber(false);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/orders/track",
+          `${import.meta.env.VITE_API_URL}/api/orders/track`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
